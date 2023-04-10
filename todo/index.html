@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<!--
+    1. Sound Effects
+    2. Animation While Loading
+    3. Dark Mode
+    4. Task Category
+    5. Alarm Task
+    6. Task Search Box
+    7. Note making App
+    8. Undo option 
+-->
+<body>
+    <div class="Todo_container">
+        <div class="topbar">
+            <h1>To Do List</h1>
+
+        </div>
+        <div class="wrapper">
+            <main>
+                <input type="text" name="SearchBox" id="SearchBox" placeholder="Search Task">
+                <div class="Todo_wrapper" id="tasksHolder">
+                </div>
+                <div class="Todo_wrapper" id="tasksHolder_Comp">
+                </div>
+            </main>
+            <div class="sidebar">
+                <div class="content"></div>
+            </div>
+        </div>
+        <div class="menuBar">
+            <span id="addNew"><i class="fa fa-plus"></i><p>New Task</p></span>
+            <span style="display: none;" id="ShowComp"><i class="fa fa-clock"></i></i><p>Completed Tasks</p></span>
+        </div>
+    </div>
+    <div class="inputHolder">
+        <div class="wrapper">
+            <div class="crossCl">
+                <i class="fas fa-times-circle"></i>
+            </div>
+            <h1>Add To Do List</h1>
+            <div class="ToDo_input">
+                <input type="text" name="TodoList_Task" id="TodoList_Task" placeholder="Enter Task to complete">
+                <input type="text" name="TodoList_Category" id="TodoList_Category" placeholder="Enter Category">
+                <textarea name="TodoList_Description" id="TodoList_Description" cols="15" rows="10" placeholder="Enter Description"></textarea>
+                <span>
+                    <button id="inputBtn">Add Task</button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var DivTodo_container = document.querySelector(".Todo_container");
+        var BtnCloseInputHolder = document.querySelector(".inputHolder .crossCl i");
+        var DivTodoInput_container = document.querySelector(".inputHolder");
+        var DivTodoListContainer = document.getElementById("tasksHolder");
+        var DivTodoListContainer_Comp = document.getElementById("tasksHolder_Comp");
+        var BtnInput = document.querySelector("#inputBtn");
+        var BtnAddNewTask = document.querySelector("#addNew");
+        var SingleTask, DeleteTask, ComplteTask;
+        var User = "Bishal";
+        var TempID = "";
+        var isModalShown = false;
+
+        var ToDoList = new Array();
+    </script>
+
+    <script src="BEscript.js"></script>
+    <script src="FEscript.js"></script>
+</body>
+</html>

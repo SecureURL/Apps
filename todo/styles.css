@@ -1,0 +1,232 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    transition: 0.5s all ease-in-out;
+}
+.wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper main{
+    /* flex:2.3; */
+    width: 70%;
+}
+.wrapper .sidebar{
+    /* flex:0.7; */
+    max-width: 30%;
+    padding: 5px 10px;
+}
+.wrapper .sidebar .content{
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
+
+.Todo_container{
+    background-image: linear-gradient(315deg, #0b2824, #121212, #1a442a);
+    color: #fff;
+    padding: 15px 10px;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.Todo_container #SearchBox{
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0;
+    background-color: #000;
+    border-radius: 7px;
+    color: grey;
+    font-size: x-large;
+}
+
+.Todo_wrapper .noData{
+    padding: 50px 10px;
+    background-color: #181b23;
+    border-radius: 5px;
+    background-image: linear-gradient(315deg, black, #215431);
+    box-shadow: 0 0 5px 3px #63cd54;
+}
+.Todo_wrapper .task .details{
+    width: 60%;
+}
+.Todo_wrapper .task .details h2,h3,h4{
+    width: fit-content;
+}
+.Todo_wrapper .task .details h2{font-size: larger;}
+.Todo_wrapper .task .details h3{font-size: medium;}
+.Todo_wrapper .task .details h4{font-size: small;}
+
+.Todo_wrapper{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10vh;
+    justify-content: center;
+    align-items: center;
+}
+.Todo_wrapper .task *{
+    cursor: pointer;
+}
+.Todo_wrapper .task{
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    margin: 3px 0;
+    padding: 5px;
+    width: 100%;
+    background-image: linear-gradient(45deg, #181b23, #484848);
+}
+.Todo_wrapper#tasksHolder_Comp{display: none;}
+.Todo_wrapper#tasksHolder_Comp .task {
+    background-image: linear-gradient(45deg, #181b23, #43b925);
+}
+.Todo_wrapper .task.delete{
+    background-image: linear-gradient(45deg, #181b23, #f90909);
+    animation-name: DeleteAnimate;
+    animation-duration: 1s;
+}
+
+@keyframes DeleteAnimate {
+    0% {
+        transform : translateX(0);
+        opacity : 1;
+    }
+    100% {
+        transform : translateX(100vw);
+        opacity : 0;
+    }
+}
+
+.Todo_wrapper .task.comp{
+    background-image: linear-gradient(45deg, #181b23, #17c725);
+    animation-name: CompAnimate;
+    animation-duration: 1s;
+}
+
+@keyframes DeleteAnimate {
+    0% {
+        transform : translateX(0);
+        opacity : 1;
+    }
+    100% {
+        transform : translateX(-100vw);
+        opacity : 0;
+    }
+}
+.Todo_wrapper .task:hover{
+    box-shadow: 0 0 6px 3px grey;
+    transform: scale(1.005);
+}
+.Todo_wrapper .task .fa-check-circle, .Todo_wrapper .task .fa-times-circle{
+    margin: 15px;
+    font-size: xx-large;
+}
+.Todo_wrapper .task  .action i{
+    margin: 0 15px;
+}
+.Todo_wrapper .task input[type=checkbox]{
+    margin: 5px;
+}
+
+.menuBar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 15px;
+    background-color: #181b23;
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+.inputHolder{
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: #2e2e2ea6;
+
+    display: none;
+}
+.inputHolder .wrapper{
+    flex-direction: column;
+    width: 80%;
+    padding: 10px;
+    background-color: #5c5c5cc2;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+.inputHolder h1{color: #fff;}
+.inputHolder .ToDo_input{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #121212;
+    border-radius: 5px;
+}
+
+.inputHolder .ToDo_input input, .inputHolder .ToDo_input textarea , .inputHolder .ToDo_input button{
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+.inputHolder .crossCl{
+    display: flex;
+    justify-content: end;
+}
+.inputHolder .crossCl i{
+    font-size: xx-large;
+    color: #b70000;
+    border: 3px solid #fff;
+    background-color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    translate: 30px -30px;
+}
+.inputHolder .ToDo_input button{
+    width: 150px;
+    border-radius: 50px;
+    color: #fff;
+    background-color: #000;
+    cursor: pointer;
+    border: 5px solid #fd5c55;
+}
+.menuBar i{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.menuBar span{
+    cursor: pointer;
+}
+.menuBar p{
+    font-size: small;
+}
+
+@media screen and (max-width: 768px){
+    .wrapper {
+        flex-direction: column;
+    }
+    .wrapper main, .wrapper .sidebar{
+        width: 100%;
+        max-width: 100%;
+    }
+}
