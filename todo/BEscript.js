@@ -52,7 +52,7 @@ function getAllUserTasks(userID)
                 ToDoList = AllData;
             }
             LoadList(); // Loading Data at the begining
-            createCategories();
+            
         })
 }
 

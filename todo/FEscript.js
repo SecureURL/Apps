@@ -1,5 +1,9 @@
 var Task_ID = "";
 var strDescription = "";
+
+searchTextBx.addEventListener("keyup", () => { 
+    SearchTask(searchTextBx.value);
+});
         //Input Form Button Action 
 BtnInput.addEventListener("click", () => {
     var Value_TodoTask = document.getElementById("TodoList_Task").value;
@@ -156,6 +160,7 @@ function LoadList() {
     deleteActionToTask();
     completeActionToTask();
     addActionToTask();
+    createCategories();
 }
 
 function Trigger_inputModal() {
@@ -210,7 +215,6 @@ function deleteActionToTask() {
                 }
             deleteTask(DeleteBtn.parentElement.parentElement.getAttribute("id"));
             LoadList(); // Loading after a task is deleted
-            createCategories();
         })
     });
 }
@@ -232,14 +236,15 @@ function completeActionToTask() {
                 }
             }
             LoadList(); // Loading after a task is completed 
-            createCategories();
         })
     });
 }
 
 function createCategories() {
-    var allCategoriesEle = document.querySelectorAll("#tasksHolder .task .details h3");
+    allCategoriesEle = document.querySelectorAll("#tasksHolder .task .details h3");
     var allCategoriesList = new Array();
+    document.getElementById("categContainer").innerHTML = "";
+    document.getElementById("Category-list").innerHTML = "";
     allCategoriesEle.forEach(element => {
         if (allCategoriesList.includes(element.textContent) == false)
         {
@@ -250,6 +255,11 @@ function createCategories() {
     });
 
     CategoriesBtns = document.querySelectorAll("#categContainer .categs");
+    CategoryBtnsAction();
+}
+
+function CategoryBtnsAction()
+{
     CategoriesBtns.forEach(categsSpans => {
         categsSpans.addEventListener("click", () => {
             if (categsSpans.children[0].classList.contains("fa-check-circle")) //Category is Checked
@@ -274,7 +284,18 @@ function createCategories() {
             }
         })
     });
-    console.log(allCategoriesList);
+}
+
+function SearchTask(searchQuery) { 
+    allTasksTitle = document.querySelectorAll("#tasksHolder .task .details h2");
+    console.log(searchQuery);
+    allTasksTitle.forEach(TaskTitles => {
+        if (TaskTitles.innerText.toLowerCase().includes(searchQuery.toLowerCase()) == false)
+            TaskTitles.parentElement.parentElement.classList.add("hide");
+        else
+            TaskTitles.parentElement.parentElement.classList.remove("hide");
+            
+    });
 }
 
 getAllUserTasks(User);

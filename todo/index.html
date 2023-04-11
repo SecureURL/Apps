@@ -64,13 +64,14 @@
 
     <script>
         var DivTodo_container = document.querySelector(".Todo_container");
+        var searchTextBx = document.getElementById("SearchBox");
         var BtnCloseInputHolder = document.querySelector(".inputHolder .crossCl i");
         var DivTodoInput_container = document.querySelector(".inputHolder");
         var DivTodoListContainer = document.getElementById("tasksHolder");
         var DivTodoListContainer_Comp = document.getElementById("tasksHolder_Comp");
         var BtnInput = document.querySelector("#inputBtn");
         var BtnAddNewTask = document.querySelector("#addNew");
-        var SingleTask, DeleteTask, ComplteTask;
+        var SingleTask, DeleteTask, ComplteTask, allTasksTitle;
         var User = "Bishal";
         var TempID = "";
         var isModalShown = false;
