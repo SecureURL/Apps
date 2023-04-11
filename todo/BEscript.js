@@ -52,6 +52,7 @@ function getAllUserTasks(userID)
                 ToDoList = AllData;
             }
             LoadList(); // Loading Data at the begining
+            createCategories();
         })
 }
 
@@ -59,9 +60,8 @@ function setTaskUpdatedData(TaskID, Data1, Data2, Data3)
 {
     // Update Task Data- 
     // https://script.google.com/macros/s/AKfycbySm3l9vcWJ5CN1fjfi0uPHHSEMmyR4AMdVnH5ZAMITTsBCVW0Z1x8JvkhFMLrbug7mwg/exec?updateRowData=TaskID2&dt1=Task%20Title&dt2=Task%20Categ&dt3=Task%20Description
-    
     var setTaskUpdate_report = "";
-    console.log(API_URL + `?updateRowData=${TaskID}&dt1=${Data1}&dt2=${Data2}&dt3=${Data3}`);
+    
     fetch(API_URL + `?updateRowData=${TaskID}&dt1=${Data1}&dt2=${Data2}&dt3=${Data3}`)
         .then(response => response.json())
         .then(data => {

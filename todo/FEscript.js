@@ -1,4 +1,5 @@
 var Task_ID = "";
+var strDescription = "";
         //Input Form Button Action 
 BtnInput.addEventListener("click", () => {
     var Value_TodoTask = document.getElementById("TodoList_Task").value;
@@ -21,9 +22,12 @@ BtnInput.addEventListener("click", () => {
     else {
         for (i = 0; i < ToDoList.length; i++) {
             if (ToDoList[i][0] == TempID) {
+                strDescription = document.getElementById("TodoList_Description").value;
                 ToDoList[i][1] = document.getElementById("TodoList_Task").value;
                 ToDoList[i][2] = document.getElementById("TodoList_Category").value;
-                ToDoList[i][3] = document.getElementById("TodoList_Description").value;
+                strDescription = strDescription.replaceAll("\n", "[newLine]");
+                
+                ToDoList[i][3] = strDescription;
 
                 setTaskUpdatedData(TempID, ToDoList[i][1], ToDoList[i][2], ToDoList[i][3]);
 
@@ -176,6 +180,7 @@ function addActionToTask() {
                     if (ToDoList[i][0] == Task.getAttribute("id")) {
                         document.getElementById("TodoList_Task").value = ToDoList[i][1];
                         document.getElementById("TodoList_Category").value = ToDoList[i][2];
+                        ToDoList[i][3] = ToDoList[i][3].replaceAll("[newLine]", "\n");
                         document.getElementById("TodoList_Description").value = ToDoList[i][3];
                         document.querySelector(".inputHolder button").innerText = "Update";
                         TempID = Task.getAttribute("id");
@@ -189,7 +194,6 @@ function addActionToTask() {
 }
 
 function deleteActionToTask() {
-    console.log("Delete Action confirmed");
     DeleteTask.forEach(DeleteBtn => {
         //event.stopImmediatePropagation();
         DeleteBtn.addEventListener("click", (e) => {
@@ -206,6 +210,7 @@ function deleteActionToTask() {
                 }
             deleteTask(DeleteBtn.parentElement.parentElement.getAttribute("id"));
             LoadList(); // Loading after a task is deleted
+            createCategories();
         })
     });
 }
@@ -227,9 +232,50 @@ function completeActionToTask() {
                 }
             }
             LoadList(); // Loading after a task is completed 
+            createCategories();
         })
     });
 }
+
+function createCategories() {
+    var allCategoriesEle = document.querySelectorAll("#tasksHolder .task .details h3");
+    var allCategoriesList = new Array();
+    allCategoriesEle.forEach(element => {
+        if (allCategoriesList.includes(element.textContent) == false)
+        {
+            allCategoriesList.push(element.textContent);
+            document.getElementById("Category-list").innerHTML += `<option>${element.textContent}</option>`;
+            document.getElementById("categContainer").insertAdjacentHTML("beforeend", `<span class="categs active"><i class="far fa-check-circle"></i>${element.textContent}</span>`);
+        }
+    });
+
+    CategoriesBtns = document.querySelectorAll("#categContainer .categs");
+    CategoriesBtns.forEach(categsSpans => {
+        categsSpans.addEventListener("click", () => {
+            if (categsSpans.children[0].classList.contains("fa-check-circle")) //Category is Checked
+            {
+                allCategoriesEle.forEach(element => {
+                    if (element.innerText == categsSpans.innerText)
+                        element.parentElement.parentElement.classList.add("hide");
+                });
+                categsSpans.classList.remove("active");
+                categsSpans.children[0].classList.remove("fa-check-circle");
+                categsSpans.children[0].classList.add("fa-times-circle");
+            }
+            else                                                              //Category is UnChecked
+            {
+                allCategoriesEle.forEach(element => {
+                    if (element.innerText == categsSpans.innerText)
+                        element.parentElement.parentElement.classList.remove("hide");
+                });
+                categsSpans.classList.add("active");
+                categsSpans.children[0].classList.add("fa-check-circle");
+                categsSpans.children[0].classList.remove("fa-times-circle");
+            }
+        })
+    });
+    console.log(allCategoriesList);
+}
+
 getAllUserTasks(User);
 
-//document.querySelectorAll("#tasksHolder .task .details h3")

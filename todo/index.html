@@ -27,6 +27,7 @@
         <div class="wrapper">
             <main>
                 <input type="text" name="SearchBox" id="SearchBox" placeholder="Search Task">
+                <div class="categContainer" id="categContainer"></div>
                 <div class="Todo_wrapper" id="tasksHolder">
                 </div>
                 <div class="Todo_wrapper" id="tasksHolder_Comp">
@@ -49,13 +50,16 @@
             <h1>Add To Do List</h1>
             <div class="ToDo_input">
                 <input type="text" name="TodoList_Task" id="TodoList_Task" placeholder="Enter Task to complete">
-                <input type="text" name="TodoList_Category" id="TodoList_Category" placeholder="Enter Category">
-                <textarea name="TodoList_Description" id="TodoList_Description" cols="15" rows="10" placeholder="Enter Description"></textarea>
+                <input type="text" name="TodoList_Category" id="TodoList_Category" placeholder="Enter  (if any)" list="Category-list">
+                <textarea name="TodoList_Description" id="TodoList_Description" cols="15" rows="10" placeholder="Enter Description (if any)"></textarea>
                 <span>
                     <button id="inputBtn">Add Task</button>
                 </span>
             </div>
         </div>
+
+        <datalist id="Category-list">
+        </datalist>
     </div>
 
     <script>
