@@ -1,5 +1,5 @@
 var Task_ID = "";
-var strDescription = "";
+var strDescription = "", CategoriesBtns, CategoriesBtnsFa;
 
 searchTextBx.addEventListener("keyup", () => { 
     SearchTask(searchTextBx.value);
@@ -254,47 +254,87 @@ function createCategories() {
         }
     });
 
+    // if (allCategoriesList.length > 1) { 
+    //     document.getElementById("categContainer").insertAdjacentHTML("afterbegin", `<span class="categs active"><i class="far fa-check-circle"></i>Show All</span>`);
+    // }
+
+    CategoriesBtnsFa = document.querySelectorAll("#categContainer .categs .fa-check-circle");
     CategoriesBtns = document.querySelectorAll("#categContainer .categs");
     CategoryBtnsAction();
 }
 
 function CategoryBtnsAction()
 {
-    CategoriesBtns.forEach(categsSpans => {
-        categsSpans.addEventListener("click", () => {
-            if (categsSpans.children[0].classList.contains("fa-check-circle")) //Category is Checked
+    CategoriesBtnsFa.forEach(categsSpans => {
+        categsSpans.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (categsSpans.classList.contains("fa-check-circle")) //Category is Checked
             {
                 allCategoriesEle.forEach(element => {
-                    if (element.innerText == categsSpans.innerText)
+                    if (element.innerText == categsSpans.parentElement.innerText)
                         element.parentElement.parentElement.classList.add("hide");
                 });
-                categsSpans.classList.remove("active");
-                categsSpans.children[0].classList.remove("fa-check-circle");
-                categsSpans.children[0].classList.add("fa-times-circle");
+                categsSpans.parentElement.classList.remove("active");
+                categsSpans.classList.remove("fa-check-circle");
+                categsSpans.classList.add("fa-times-circle");
             }
             else                                                              //Category is UnChecked
             {
                 allCategoriesEle.forEach(element => {
-                    if (element.innerText == categsSpans.innerText)
+                    if (element.innerText == categsSpans.parentElement.innerText)
                         element.parentElement.parentElement.classList.remove("hide");
                 });
-                categsSpans.classList.add("active");
-                categsSpans.children[0].classList.add("fa-check-circle");
-                categsSpans.children[0].classList.remove("fa-times-circle");
+                categsSpans.parentElement.classList.add("active");
+                categsSpans.classList.add("fa-check-circle");
+                categsSpans.classList.remove("fa-times-circle");
             }
+        })
+    });
+
+    CategoriesBtns.forEach(CategSpans => {
+        CategSpans.addEventListener("click", () => { 
+            for (i = 0; i < CategoriesBtns.length; i++) {
+                if (CategoriesBtns[i] != CategSpans)
+                {
+                    CategoriesBtns[i].classList.remove("active");
+                    CategoriesBtns[i].children[0].classList.remove("fa-check-circle");
+                    CategoriesBtns[i].children[0].classList.add("fa-times-circle");
+                }
+
+                else
+                {
+                    CategoriesBtns[i].classList.add("active");
+                    CategoriesBtns[i].children[0].classList.add("fa-check-circle");
+                    CategoriesBtns[i].children[0].classList.remove("fa-times-circle");
+                }
+            }
+
+            allCategoriesEle.forEach(element => {
+                if (element.innerText == CategSpans.innerText)
+                    element.parentElement.parentElement.classList.remove("hide");
+                else
+                    element.parentElement.parentElement.classList.add("hide");
+            });
         })
     });
 }
 
 function SearchTask(searchQuery) { 
     allTasksTitle = document.querySelectorAll("#tasksHolder .task .details h2");
+    allCategoriesEle = document.querySelectorAll("#tasksHolder .task .details h3");
     console.log(searchQuery);
     allTasksTitle.forEach(TaskTitles => {
         if (TaskTitles.innerText.toLowerCase().includes(searchQuery.toLowerCase()) == false)
             TaskTitles.parentElement.parentElement.classList.add("hide");
         else
             TaskTitles.parentElement.parentElement.classList.remove("hide");
-            
+    });
+
+    allCategoriesEle.forEach(TaskCategory => {
+        if (TaskCategory.innerText.toLowerCase().includes(searchQuery.toLowerCase()) == false)
+            TaskCategory.parentElement.parentElement.classList.add("hide");
+        else
+            TaskCategory.parentElement.parentElement.classList.remove("hide");
     });
 }
 
