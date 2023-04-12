@@ -19,9 +19,6 @@ BtnInput.addEventListener("click", () => {
         
         getNewTaskID(Value_TodoTask, Value_TodoCategory, Value_TodoDescription, User);
         Trigger_inputModal();
-        document.getElementById("TodoList_Task").value = "";
-        document.getElementById("TodoList_Category").value = "";
-        document.getElementById("TodoList_Description").value = "";
     }
     else {
         for (i = 0; i < ToDoList.length; i++) {
@@ -46,9 +43,6 @@ BtnInput.addEventListener("click", () => {
 
 //Input Form Close button Action 
 BtnCloseInputHolder.addEventListener("click", () => {
-    document.getElementById("TodoList_Task").value = "";
-    document.getElementById("TodoList_Category").value = "";
-    document.getElementById("TodoList_Description").value = "";
     Trigger_inputModal();
 })
 
@@ -173,6 +167,9 @@ function Trigger_inputModal() {
     else {
         DivTodo_container.style.filter = "none";
         DivTodoInput_container.style.display = "none";
+        document.getElementById("TodoList_Task").value = "";
+        document.getElementById("TodoList_Category").value = "";
+        document.getElementById("TodoList_Description").value = "";
     }
 }
 
