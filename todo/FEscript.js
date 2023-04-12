@@ -157,8 +157,10 @@ function LoadList() {
     SingleTask = document.querySelectorAll(".Todo_wrapper .task");
     DeleteTask = document.querySelectorAll(".Todo_wrapper .task .action .fa-trash");
     ComplteTask = document.querySelectorAll(".Todo_wrapper .task .fa-check-circle");
+    InComplteTask = document.querySelectorAll(".Todo_wrapper .task .fa-times-circle");
     deleteActionToTask();
     completeActionToTask();
+    IncompleteActionToTask();
     addActionToTask();
     createCategories();
 }
@@ -232,6 +234,27 @@ function completeActionToTask() {
                 if (ToDoList[i][0] == CheckBtn.parentElement.getAttribute("id")) {
                     ToDoList[i][5] = "complete";
                     setTaskAsCompleted(CheckBtn.parentElement.getAttribute("id"));
+                    break;
+                }
+            }
+            LoadList(); // Loading after a task is completed 
+        })
+    });
+}
+
+function IncompleteActionToTask() {
+    InComplteTask.forEach(CheckBtn => {
+        CheckBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            //e.stopImmediatePropagation();
+            console.log("InCompleted Task ID- "+CheckBtn.parentElement.getAttribute("id"));
+            CheckBtn.parentElement.classList.add("comp");
+            setTimeout(function () { CheckBtn.parentElement.remove(); }, 2000);
+            
+            for (i = 0; i < ToDoList.length; i++) {
+                if (ToDoList[i][0] == CheckBtn.parentElement.getAttribute("id")) {
+                    ToDoList[i][5] = "Incomplete";
+                    setTaskAsInCompleted(CheckBtn.parentElement.getAttribute("id"));
                     break;
                 }
             }
@@ -331,9 +354,7 @@ function SearchTask(searchQuery) {
     });
 
     allCategoriesEle.forEach(TaskCategory => {
-        if (TaskCategory.innerText.toLowerCase().includes(searchQuery.toLowerCase()) == false)
-            TaskCategory.parentElement.parentElement.classList.add("hide");
-        else
+        if (TaskCategory.innerText.toLowerCase().includes(searchQuery.toLowerCase()) == true)
             TaskCategory.parentElement.parentElement.classList.remove("hide");
     });
 }
