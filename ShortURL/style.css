@@ -49,9 +49,10 @@
     align-items: center;
     margin: 10px;
 }
-.wrapper main .urlEntry_container .container .output .outLink p{
+.wrapper main .urlEntry_container .container .output .outLink a{
     background-color: #fff;
     color: black;
+    text-decoration: none;
     padding: 10px;
     border-radius: 5px 0px 0px 5px;
 }

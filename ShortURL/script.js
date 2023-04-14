@@ -5,10 +5,11 @@ var OutputDiv = document.querySelector(".output");
 
 shortenButton.addEventListener("click", () => {
     if (LinkToshorten.value != "") {
-        console.log("is Valid URL - " + validURL(LinkToshorten.value));
+        //console.log("is Valid URL - " + validURL(LinkToshorten.value));
         if (validURL(LinkToshorten.value) != false) {
 
-            document.querySelector(".outLink p").textContent = "";
+            document.querySelector(".outLink a").textContent = "";
+            document.querySelector(".outLink a").setAttribute("href","");
             document.querySelector(".output .content").style.display = "none";
             
             // Insert Query -
@@ -30,8 +31,9 @@ shortenButton.addEventListener("click", () => {
                     document.querySelector("#spinner").style.animation = "animation: spin 3s linear infinite";
                     document.querySelector("#spinner").style.display = "none";
                     document.querySelector(".output .content").style.display = "flex";
-                    document.querySelector(".outLink p").textContent = "https://secureurl.github.io/URL?o=" + data.Data.replace("Data Inserted Successfully with ID - ", "");
-                    console.log(document.querySelector(".outLink p").textContent);
+                    document.querySelector(".outLink a").textContent = "https://secureurl.github.io/URL?o=" + data.Data.replace("Data Inserted Successfully with ID - ", "");
+                    document.querySelector(".outLink a").setAttribute("href","https://secureurl.github.io/URL?o=" + data.Data.replace("Data Inserted Successfully with ID - ", ""));
+                    //console.log(document.querySelector(".outLink a").textContent);
                     return;
                 });
         }
@@ -44,14 +46,14 @@ shortenButton.addEventListener("click", () => {
 })
 
 CopyBtn.addEventListener("click", () => {
-    console.log("copy button clicked");
-    if (document.querySelector(".outLink p").textContent != "") {
+    //console.log("copy button clicked");
+    if (document.querySelector(".outLink a").textContent != "") {
         copyText();
     }
 })
 
 function copyText() {
-    const textToCopy = document.querySelector(".outLink p").textContent;
+    const textToCopy = document.querySelector(".outLink a").textContent;
 
     navigator.clipboard.writeText(textToCopy)
         .then(() => {
