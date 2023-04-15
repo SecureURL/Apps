@@ -7,7 +7,10 @@ shortenButton.addEventListener("click", () => {
     if (LinkToshorten.value != "") {
         //console.log("is Valid URL - " + validURL(LinkToshorten.value));
         if (validURL(LinkToshorten.value) != false) {
-
+            if (LinkToshorten.value.includes("https://") == false)
+            {
+                LinkToshorten.value = "https://" + LinkToshorten.value;
+            }
             document.querySelector(".outLink a").textContent = "";
             document.querySelector(".outLink a").setAttribute("href","");
             document.querySelector(".output .content").style.display = "none";
